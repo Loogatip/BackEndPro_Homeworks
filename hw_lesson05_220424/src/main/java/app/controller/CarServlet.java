@@ -19,7 +19,7 @@ public class CarServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // запрос
-        // http://255.255.255.15:8080/cars - наша задача получить идентификатор запроса
+        // http://255.255.255.15:8080/cars?id=3 - наша задача получить идентификатор запроса
         Map<String, String[]> parameters = req.getParameterMap();
         if (parameters.get("id") != null) {
             Long id = Long.parseLong(parameters.get("id")[0]);
@@ -57,7 +57,6 @@ public class CarServlet extends HttpServlet {
         BigDecimal newPrice = new BigDecimal(parameters.get("price")[0]);
 
         Car car = repository.getById(id);
-
         car.setPrice(newPrice);
 
         repository.update(car);
